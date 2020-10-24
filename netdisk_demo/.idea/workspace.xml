@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="53d04718-4ee6-4832-a161-76511cad505e" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" path="/usr/local/go" />
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+  </component>
+  <component name="ProjectId" id="1j84x9FAk5mGDmJH9u4JXTc7xnt" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="configurable.Global.GOPATH.is.expanded" value="true" />
+    <property name="configurable.Module.GOPATH.is.expanded" value="false" />
+    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/view" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="watcher.settings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/view" />
+      <recent name="$PROJECT_DIR$/static" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/handler" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JavaScript Debug.signin.html">
+    <configuration name="go build handler.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="netdisk_demo" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/handler/handler.go" />
+      <package value="net_disk_demo" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build net_disk_demo" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="netdisk_demo" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/main.go" />
+      <package value="net_disk_demo" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="signin.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/netdisk_demo/static/view/signin.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.signin.html" />
+        <item itemvalue="Go Build.go build handler.go" />
+        <item itemvalue="Go Build.go build net_disk_demo" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1850" y="440" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603534051957">
+      <screen x="1440" y="23" width="1920" height="974" />
+    </state>
+    <state x="1850" y="476" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.794/1440.23.1920.1057@1440.23.1920.1057" timestamp="1603176758433" />
+    <state x="1850" y="440" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.877/1440.23.1920.974@1440.23.1920.974" timestamp="1603534051957" />
+    <state x="1755" y="452" key="EditFileWatcherDialog" timestamp="1603177478384">
+      <screen x="1440" y="23" width="1920" height="1057" />
+    </state>
+    <state x="1755" y="452" key="EditFileWatcherDialog/0.23.1440.794/1440.23.1920.1057@1440.23.1920.1057" timestamp="1603177478384" />
+    <state width="565" height="179" key="GridCell.Tab.0.bottom" timestamp="1603280682018">
+      <screen x="1440" y="23" width="1920" height="1057" />
+    </state>
+    <state width="565" height="179" key="GridCell.Tab.0.bottom/0.23.1440.794/1440.23.1920.1057@1440.23.1920.1057" timestamp="1603280682018" />
+    <state width="565" height="179" key="GridCell.Tab.0.center" timestamp="1603280682017">
+      <screen x="1440" y="23" width="1920" height="1057" />
+    </state>
+    <state width="565" height="179" key="GridCell.Tab.0.center/0.23.1440.794/1440.23.1920.1057@1440.23.1920.1057" timestamp="1603280682017" />
+    <state width="565" height="179" key="GridCell.Tab.0.left" timestamp="1603280682017">
+      <screen x="1440" y="23" width="1920" height="1057" />
+    </state>
+    <state width="565" height="179" key="GridCell.Tab.0.left/0.23.1440.794/1440.23.1920.1057@1440.23.1920.1057" timestamp="1603280682017" />
+    <state width="565" height="179" key="GridCell.Tab.0.right" timestamp="1603280682017">
+      <screen x="1440" y="23" width="1920" height="1057" />
+    </state>
+    <state width="565" height="179" key="GridCell.Tab.0.right/0.23.1440.794/1440.23.1920.1057@1440.23.1920.1057" timestamp="1603280682017" />
+    <state x="1599" y="306" key="SettingsEditor" timestamp="1603177479303">
+      <screen x="1440" y="23" width="1920" height="1057" />
+    </state>
+    <state x="1599" y="306" key="SettingsEditor/0.23.1440.794/1440.23.1920.1057@1440.23.1920.1057" timestamp="1603177479303" />
+    <state x="1755" y="374" width="670" height="623" key="search.everywhere.popup" timestamp="1603535251170">
+      <screen x="1440" y="23" width="1920" height="974" />
+    </state>
+    <state x="1755" y="404" width="670" height="676" key="search.everywhere.popup/0.23.1440.794/1440.23.1920.1057@1440.23.1920.1057" timestamp="1603179090343" />
+    <state x="1755" y="374" width="670" height="623" key="search.everywhere.popup/0.23.1440.877/1440.23.1920.974@1440.23.1920.974" timestamp="1603535251170" />
+  </component>
+</project>

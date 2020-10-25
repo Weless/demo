@@ -71,3 +71,56 @@ func UpdateToken(username string, token string) bool {
 	}
 	return true
 }
+
+type UserToken struct {
+	UserName string
+	Token    string
+}
+
+// GetUserToken:获取用户token
+func GetUserToken(username string) string {
+	sql := "select user_name,user_token from tbl_user_token where user_name = ? limit 1"
+	stmt, err := myDB.DBConn().Prepare(sql)
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+	defer stmt.Close()
+
+	userToken := &UserToken{}
+	err = stmt.QueryRow(username).Scan(&userToken.UserName, &userToken.Token)
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+	return userToken.Token
+}
+
+type UserInfo struct {
+	UserName     string
+	Email        string
+	Phone        string
+	SignupAt     string
+	LastActiveAt string
+	Status       int
+}
+
+// GetUserInfo:获取用户信息
+func GetUserInfo(username string) (UserInfo, error) {
+	sql := "select user_name, email, phone,signup_at, last_active, status from tbl_user where user_name = ? limit 1"
+	stmt, err := myDB.DBConn().Prepare(sql)
+	if err != nil {
+		fmt.Println(err)
+		return UserInfo{}, err
+	}
+	defer stmt.Close()
+
+	userInfo := UserInfo{}
+	err = stmt.QueryRow(username).Scan(&userInfo.UserName, &userInfo.Email, &userInfo.Phone, &userInfo.SignupAt,
+		&userInfo.LastActiveAt, &userInfo.Status)
+	if err != nil {
+		fmt.Println(err)
+		return UserInfo{}, err
+	}
+	return userInfo, nil
+}

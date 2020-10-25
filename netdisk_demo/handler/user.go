@@ -45,6 +45,7 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// SignInHandler:登录接口
 func SignInHandler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	username := r.Form.Get("username")
@@ -65,7 +66,54 @@ func SignInHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// 3. 登录成功后重定向到首页
-	w.Write([]byte("http://" + r.Host + "/static/view/home.html"))
+	//w.Write([]byte("http://" + r.Host + "/static/view/home.html"))
+
+	resp := utils.RespMsg{
+		Code: 0,
+		Msg:  "OK",
+		Data: struct {
+			Location string
+			UserName string
+			Token    string
+		}{
+			Location: "http://" + r.Host + "/static/view/home.html",
+			UserName: username,
+			Token:    token,
+		},
+	}
+	w.Write(resp.JSONBytes())
+}
+
+// UserInfoHandler:查询用户信息接口
+func UserInfoHandler(w http.ResponseWriter, r *http.Request) {
+	// 1. 解析请求参数
+	r.ParseForm()
+
+	//token := r.Form.Get("token")
+	username := r.Form.Get("username")
+	// 2. 验证token是否有效
+	//ok := IsTokenValid(username, token)
+	//if !ok {
+	//	w.WriteHeader(http.StatusForbidden)
+	//	w.Write([]byte("failed to check token"))
+	//	return
+	//}
+
+	// 3. 查询用户信息
+	user, err := db.GetUserInfo(username)
+	if err != nil {
+		w.WriteHeader(http.StatusForbidden)
+		w.Write([]byte("failed to find user"))
+		return
+	}
+
+	// 4. 组装并且响应
+	resp := utils.RespMsg{
+		Code: 0,
+		Msg:  "OK",
+		Data: user,
+	}
+	w.Write(resp.JSONBytes())
 }
 
 // GenToken:生成token
@@ -73,4 +121,19 @@ func GenToken(username string) string {
 	// md5(username + timestamp + token_salt) + timestamp[:8]
 	ts := fmt.Sprintf("%x", time.Now().Unix())
 	return utils.MD5([]byte(username+ts+tokenSalt)) + ts[:8]
+}
+
+// IsTokenValid:判断token是否有效
+func IsTokenValid(username, token string) bool {
+	if len(token) == 40 && username != "" {
+		return true
+	} else {
+		return false
+	}
+
+	// 判断token的时效性，是否过期
+
+	// 从数据库查询username对应的token信息
+
+	// 对比两个token是否一致
 }

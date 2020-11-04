@@ -6,9 +6,11 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"net_disk_demo/db"
 	"net_disk_demo/meta"
 	"net_disk_demo/utils"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -66,8 +68,38 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 			fmt.Println("failed to upload file")
 		}
 
+		// TODO:更新用户文件表记录
+		r.ParseForm()
+		username := r.Form.Get("username")
+		ok = db.OnUserFileUploadFinished(username, fileMeta.FileSha1, fileMeta.FileName, fileMeta.FileSize)
+		if !ok {
+			w.Write([]byte("failed to upload"))
+			return
+		}
+
 		http.Redirect(w, r, "/file/upload/suc", http.StatusFound)
 	}
+}
+
+// FileQueryHandler:批量查询文件的元信息
+func FileQueryHandler(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+
+	limitCnt, _ := strconv.Atoi(r.Form.Get("limit"))
+	username := r.Form.Get("username")
+
+	userFiles, err := db.QueryUserFileMetas(username, limitCnt)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	data, err := json.Marshal(userFiles)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	w.Write(data)
 }
 
 // UploadSucHandler:上传已完成
@@ -193,4 +225,49 @@ func FileDeleteHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("delete successful!"))
+}
+
+// TryFastUploadHandler:尝试秒传接口
+func TryFastUploadHandler(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+
+	// 1. 解析请求参数
+	username := r.Form.Get("username")
+	filehash := r.Form.Get("filehash")
+	filename := r.Form.Get("filename")
+	filesize, _ := strconv.ParseInt(r.Form.Get("filesize"), 10, 64)
+
+	// 2. 从文件表中查询相同hash的文件记录
+	fileMeta, err := meta.GetFileMetaDB(filehash)
+	if err != nil {
+		fmt.Println(err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	// 3. 查不到记录则返回秒传失败
+	if fileMeta == nil {
+		resp := utils.RespMsg{
+			Code: -1,
+			Msg:  "秒传失败，请访问普通上传接口",
+		}
+		w.Write(resp.JSONBytes())
+		return
+	}
+
+	// 4. 上传过则将文件信息写入用户文件表，返回成功
+	ok := db.OnUserFileUploadFinished(username, filehash, filename, filesize)
+	if ok {
+		resp := utils.RespMsg{
+			Code: 0,
+			Msg:  "秒传成功",
+		}
+		w.Write(resp.JSONBytes())
+	} else {
+		resp := utils.RespMsg{
+			Code: -1,
+			Msg:  "秒传失败，请访问普通上传接口",
+		}
+		w.Write(resp.JSONBytes())
+	}
 }

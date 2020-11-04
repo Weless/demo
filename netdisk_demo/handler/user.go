@@ -30,7 +30,7 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	username := r.Form.Get("username")
 	passwd := r.Form.Get("password")
-
+	fmt.Println(username, passwd)
 	if len(username) < 3 || len(passwd) < 5 {
 		w.Write([]byte("invalid parameter"))
 		return

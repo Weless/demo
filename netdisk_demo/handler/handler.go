@@ -15,7 +15,7 @@ import (
 	"time"
 )
 
-// UploadHandler:上传文件
+// UploadHandler : 上传文件
 func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		// 返回上传的html页面
@@ -81,7 +81,7 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// FileQueryHandler:批量查询文件的元信息
+// FileQueryHandler : 批量查询文件的元信息
 func FileQueryHandler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 
@@ -102,12 +102,12 @@ func FileQueryHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(data)
 }
 
-// UploadSucHandler:上传已完成
+// UploadSucHandler : 上传已完成
 func UploadSucHandler(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, "Upload finished!")
 }
 
-// GetFileMetaHandler:获取文件元信息
+// GetFileMetaHandler : 获取文件元信息
 func GetFileMetaHandler(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
@@ -128,7 +128,7 @@ func GetFileMetaHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(data)
 }
 
-// DownloadHandler:下载文件
+// DownloadHandler : 下载文件
 func DownloadHandler(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
@@ -158,7 +158,7 @@ func DownloadHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(data)
 }
 
-// FileMetaUpdateHandler:更新元信息接口（重命名）
+// FileMetaUpdateHandler : 更新元信息接口（重命名）
 func FileMetaUpdateHandler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 
@@ -205,7 +205,7 @@ func FileMetaUpdateHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(data)
 }
 
-// FileDeleteHandler:删除文件及元信息
+// FileDeleteHandler : 删除文件及元信息
 func FileDeleteHandler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 
@@ -227,7 +227,7 @@ func FileDeleteHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("delete successful!"))
 }
 
-// TryFastUploadHandler:尝试秒传接口
+// TryFastUploadHandler : 尝试秒传接口
 func TryFastUploadHandler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 

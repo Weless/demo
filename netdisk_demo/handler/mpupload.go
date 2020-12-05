@@ -2,7 +2,6 @@ package handler
 
 import (
 	"fmt"
-	"github.com/garyburd/redigo/redis"
 	"math"
 	"net/http"
 	rPool "net_disk_demo/cache/redis"
@@ -13,9 +12,11 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/garyburd/redigo/redis"
 )
 
-// MultipartUploadInfo:分块上传信息
+// MultipartUploadInfo : 分块上传信息
 type MultipartUploadInfo struct {
 	FileHash   string
 	FileSize   int
@@ -24,6 +25,7 @@ type MultipartUploadInfo struct {
 	ChunkCount int
 }
 
+// InitialMultiPartUploadHandler :
 func InitialMultiPartUploadHandler(w http.ResponseWriter, r *http.Request) {
 	// 1. 解析用户请求参数
 	r.ParseForm()
@@ -49,10 +51,10 @@ func InitialMultiPartUploadHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(utils.NewRespMsg(0, "OK", upinfo).JSONBytes())
 }
 
-// UploadPartHandler:上传文件分块
+// UploadPartHandler : 上传文件分块
 func UploadPartHandler(w http.ResponseWriter, r *http.Request) {
 	// 1. 解析用户请求参数
-	uploadId := r.Form.Get("uploadid")
+	uploadID := r.Form.Get("uploadid")
 	chunkIndex := r.Form.Get("index")
 
 	// 2. 获得redis连接池中的一个连接
@@ -60,10 +62,10 @@ func UploadPartHandler(w http.ResponseWriter, r *http.Request) {
 	defer rConn.Close()
 
 	// 3. 获得文件句柄，用于存储分块内容
-	fpath := "/data/" + uploadId + "/" + chunkIndex
+	fpath := "/data/" + uploadID + "/" + chunkIndex
 	os.MkdirAll(path.Dir(fpath), 0744)
 
-	fd, err := os.Create("/data/" + uploadId + "/" + chunkIndex)
+	fd, err := os.Create("/data/" + uploadID + "/" + chunkIndex)
 	if err != nil {
 		w.Write(utils.NewRespMsg(-1, "Upload part failed", nil).JSONBytes())
 		return
@@ -80,12 +82,13 @@ func UploadPartHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	// 4. 更新redis缓存状态
-	rConn.Do("HSET", "MP_"+uploadId, "chkidx_"+chunkIndex, 1)
+	rConn.Do("HSET", "MP_"+uploadID, "chkidx_"+chunkIndex, 1)
 
 	// 5. 返回处理结果到客户端
 	w.Write(utils.NewRespMsg(0, "OK", nil).JSONBytes())
 }
 
+// CompleteUploadHandler :
 func CompleteUploadHandler(w http.ResponseWriter, r *http.Request) {
 	// 1. 解析请求参数
 	r.ParseForm()

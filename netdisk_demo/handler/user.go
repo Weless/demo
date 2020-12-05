@@ -14,7 +14,7 @@ const (
 	tokenSalt = "joey"
 )
 
-// SignUpHandler:注册用户
+// SignUpHandler : 注册用户
 func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		data, err := ioutil.ReadFile("./static/view/signup.html")
@@ -45,7 +45,7 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// SignInHandler:登录接口
+// SignInHandler : 登录接口
 func SignInHandler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	username := r.Form.Get("username")
@@ -84,7 +84,7 @@ func SignInHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(resp.JSONBytes())
 }
 
-// UserInfoHandler:查询用户信息接口
+// UserInfoHandler : 查询用户信息接口
 func UserInfoHandler(w http.ResponseWriter, r *http.Request) {
 	// 1. 解析请求参数
 	r.ParseForm()
@@ -116,21 +116,20 @@ func UserInfoHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(resp.JSONBytes())
 }
 
-// GenToken:生成token
+// GenToken : 生成token
 func GenToken(username string) string {
 	// md5(username + timestamp + token_salt) + timestamp[:8]
 	ts := fmt.Sprintf("%x", time.Now().Unix())
 	return utils.MD5([]byte(username+ts+tokenSalt)) + ts[:8]
 }
 
-// IsTokenValid:判断token是否有效
+// IsTokenValid : 判断token是否有效
 func IsTokenValid(username, token string) bool {
 	if len(token) == 40 && username != "" {
 		return true
 	} else {
 		return false
 	}
-
 	// 判断token的时效性，是否过期
 
 	// 从数据库查询username对应的token信息

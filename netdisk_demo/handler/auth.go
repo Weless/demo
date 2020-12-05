@@ -2,7 +2,7 @@ package handler
 
 import "net/http"
 
-// HTTPInterceptor:http请求拦截器
+// HTTPInterceptor : http请求拦截器
 func HTTPInterceptor(h http.HandlerFunc) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()

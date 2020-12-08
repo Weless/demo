@@ -1,6 +1,7 @@
 package base
 
 import (
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/sirupsen/logrus"
 	"github.com/tietang/dbx"
 	"github.com/tietang/props/kvs"
@@ -25,7 +26,8 @@ func (d *DbxDatabaseStarter) Setup(ctx infra.StarterContext) {
 	if err != nil {
 		panic(err)
 	}
-	logrus.Infof("%+v\n", settings)
+	settings.Options["parseTime"] = "true"
+	//logrus.Infof("%+v\n", settings)
 	logrus.Info("mysql.conn url:", settings.ShortDataSourceName())
 	db, err = dbx.Open(settings)
 	if err != nil {

@@ -1,7 +1,7 @@
 package base
 
 import (
-	"fmt"
+	"github.com/sirupsen/logrus"
 	"github.com/tietang/props/kvs"
 	"joeytest.com/resk/infra"
 )
@@ -18,5 +18,5 @@ type PropsStarter struct {
 
 func (p *PropsStarter) Init(ctx infra.StarterContext) {
 	props = ctx.Props()
-	fmt.Println("初始化配置完成")
+	logrus.Info("初始化配置完成")
 }

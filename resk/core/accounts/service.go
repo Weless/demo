@@ -5,7 +5,16 @@ import (
 	"github.com/shopspring/decimal"
 	"joeytest.com/resk/infra/base"
 	"joeytest.com/resk/services"
+	"sync"
 )
+
+var once sync.Once
+
+func init() {
+	once.Do(func() {
+		services.IAccountService = new(accountService)
+	})
+}
 
 type accountService struct {
 }
@@ -69,5 +78,12 @@ func (a *accountService) StoreValue(dto services.AccountTransferDTO) (services.T
 }
 
 func (a *accountService) GetEnvelopeAccountByUserId(userId string) *services.AccountDTO {
-	panic("implement me")
+	domain := accountDomain{}
+	account := domain.GetEnvelopeAccountByUserId(userId)
+	return account
+}
+
+func (a *accountService) GetAccount(accountNo string) *services.AccountDTO {
+	domain := accountDomain{}
+	return domain.GetAccount(accountNo)
 }

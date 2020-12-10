@@ -35,7 +35,10 @@ func (i *IrisServerStarter) Start(ctx infra.StarterContext) {
 	}
 	// 启动Iris
 	port := ctx.Props().GetDefault("app.server.port", "8000")
-	Iris().Run(iris.Addr(":" + port))
+	err := Iris().Run(iris.Addr(":" + port))
+	if err != nil {
+		logrus.Error(err)
+	}
 }
 
 func (i *IrisServerStarter) StartBlocking() bool {

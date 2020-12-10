@@ -8,7 +8,9 @@ import (
 )
 
 func init() {
-	base.RegisterApi(new(AccountApi))
+	accountApi := new(AccountApi)
+	logrus.Info("accountApi:", accountApi)
+	base.RegisterApi(accountApi)
 }
 
 type AccountApi struct {
@@ -17,7 +19,9 @@ type AccountApi struct {
 
 func (a *AccountApi) Init() {
 	a.service = services.GetAccountService()
+	logrus.Info("GetAccountService:", services.GetAccountService())
 	groupRouter := base.Iris().Party("/v1/account")
+	logrus.Info("groupRouter:", groupRouter)
 	groupRouter.Post("/create", a.creatHandler)
 }
 
@@ -36,7 +40,8 @@ func (a *AccountApi) creatHandler(ctx iris.Context) {
 		logrus.Error(err)
 		return
 	}
-
+	logrus.Info("执行创建账户的密码")
+	logrus.Info("service:", a.service)
 	// 执行创建账户的代码
 	dto, err := a.service.CreateAccount(account)
 	if err != nil {

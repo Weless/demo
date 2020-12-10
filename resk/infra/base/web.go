@@ -1,6 +1,9 @@
 package base
 
-import "joeytest.com/resk/infra"
+import (
+	"github.com/sirupsen/logrus"
+	"joeytest.com/resk/infra"
+)
 
 var apiInitializerRegister *infra.InitializerRegister = new(infra.InitializerRegister)
 
@@ -19,7 +22,10 @@ type WebApiStarter struct {
 }
 
 func (w *WebApiStarter) Setup(ctx infra.StarterContext) {
+	logrus.Info("apiInitializerRegister:", apiInitializerRegister)
+	logrus.Info(len(apiInitializerRegister.Initializers))
 	for _, v := range GetApiInitializers() {
+		logrus.Info("initializer:", v)
 		v.Init()
 	}
 }

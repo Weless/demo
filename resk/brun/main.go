@@ -1,7 +1,6 @@
 package main
 
 import (
-	_ "github.com/go-sql-driver/mysql"
 	"github.com/tietang/props/ini"
 	"github.com/tietang/props/kvs"
 	_ "joeytest.com/resk"
